@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Signup</title>
+		<link href="/css/signup.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<%- include('partials/nav') %>
+		<div class = "signup">
+			<form method="post" action="/signup" class="sign-up">
+			  <table>
+				
+				<tr><td><input type="text" placeholder="Name" required name="User"></td></tr>
+				<tr><td><input type="text" placeholder="Email" required name="Email"></td></tr>
+				<tr><td><input type="password" placeholder="Password" required name="password"></td></tr>
+				<tr><td><input type="password" placeholder="Confirm Password" required ></td></tr>
+				<tr><td><button class="submit">Signup</button></td></tr>
+
+			  </table>
+			</form>
+		
+		</div>
+		<script src="/js/main.js"></script>
+	</body>
+
+
+
+</html>

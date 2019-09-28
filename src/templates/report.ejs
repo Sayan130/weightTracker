@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Report</title>
+    </head>
+    <body>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="/js/main.js"></script>
+        <%- include('partials/nav') %>
+        <div class="report">
+                <% if(locals.user){ %>
+						<h3 id="welcome-text">
+                            <%= user %>
+                        </h3>
+                        <div class="addWeight">
+                            <form method="POST" action="/addWeight" >
+                            <input type="number" placeholder="Weight" required name="weight">
+                            <input type="date" required name="date">
+                            <button>Add</button>
+                            </form>
+                        </div>
+                <%}%>
+
+                <div class="display">
+                        <script>getResults();</script>
+                        <table id="display_table">
+                            <tr>
+                                <th>Weight</th>
+                                <th>Date</th>
+                            </tr>
+                            
+                        </table>
+                        
+                        <div id="table">
+                        </div>
+                </div>
+        </div>
+
+        
+    </body>
+
+
+
+
+
+</html>

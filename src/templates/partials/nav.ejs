@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+    <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/css/style.css" type="text/css">
+
+        <div class="nav-bar">
+				<nav id="navbar">
+				<a href="/" class="home-nav"><strong>WT</strong></a>
+				<a href="#">About</a>
+				<% if(!isLoggedIn()){ %>
+					<a href="/login" class="login-nav">Login</a>
+					<a href="/signup" class="signup-nav">Signup</a>
+				<%}else{%>
+					<a href="/logout" class="logout-nav">Logout</a>
+					
+				<%}%>
+				
+				
+				</nav>
+			</div>
+
+
+

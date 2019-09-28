@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+	<html>
+		
+		<head>
+			<title>WeightTracker</title>
+		</head>
+		<link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/css/style.css" type="text/css">
+		<body>
+			<%- include('partials/nav') %>
+			<div class="main">
+				<% if(locals.user){ %>
+					<div class ="loginView">
+						<h3 id="welcome-text">
+							<%= user %>
+						</h3>
+						<button><h4><a href="/report">View Report</a></h4></button>
+						
+					</div>
+					
+				<%}%>
+				<div class="feature">
+					<div class = "one">
+						<p id="welcome-paragraph">Manage your weight by tracking it day to day.</p>
+					</div>
+
+					<div class = "two">
+						<p id="welcome-paragraph-two">It will show how much weight you have lost or gained.</p>
+					</div>
+					
+					<div class = "three">
+						<p id="welcome-paragraph-three">Signup and you are ready to go.</p>
+					</div>				
+				</div>
+			</div>
+			<hr id="last">
+
+		
+		<body>
+		
+
+	</html>
