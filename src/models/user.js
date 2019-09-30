@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const vali = require("validator");
 
 let schema = mongoose.Schema({
 
@@ -8,20 +10,32 @@ let schema = mongoose.Schema({
 
     email:{
         type: String,
+        unique: true,
+        validate: {
+            validator:function(v){
+                if(!vali.isEmail(v))
+                    throw new Error("invalid mail ID");
+            }
+        }
     },
 
     password:{
         type: String,
+        minlength: 6
     }
 
 
 });
-// schema.pre("save", function(next){
+schema.pre("save", async function(next){
+    try{
+        this.password =  await bcrypt.hash(this.password);
+        next();
+    }
+    catch(err){
+        next();
+    }
 
-
-
-
-// });
+});
 
 const User = mongoose.model("User", schema);
 

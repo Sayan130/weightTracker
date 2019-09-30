@@ -46,7 +46,9 @@ app.get("/", (req, res)=>{
     console.log(req.session);
     res.render("header",{user: req.user=== undefined ? undefined: req.user.name, isLoggedIn: req.isAuthenticated});
 });
-
+app.get("*", (req, res)=>{
+    res.send("What are you looking for brother ??????....");
+})
 app.listen(port, ()=>{
     console.log("Listening on port number "+`${port}`);
 })

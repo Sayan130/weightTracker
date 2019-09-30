@@ -14,19 +14,25 @@ userRouter.get("/login", (req, res, next)=>{
 
 
 userRouter.post("/signup", async(req, res)=>{
-    
+    try{
+    console.log(req.body.User);
     let result = new User({name: req.body.User, email: req.body.Email, password: req.body.password});
-    await result.save()
-    res.render("login",{user: req.user=== undefined ? undefined: req.user.name, isLoggedIn: req.isAuthenticated});
+    await result.save();
+    res.send({sucess: true});
+    }catch(err){
+        res.send({sucess: true})
+    }
 });
 
 userRouter.post("/login",passport.authenticate('Local', {failureRedirect:'/login'}), (req, res)=>{
     
     res.render("header", {user: req.user=== undefined ? undefined: req.user.name, isLoggedIn: req.isAuthenticated});
 });
+
 userRouter.get("/report",isAuthenticated, (req, res)=>{
     res.render("report", {user: req.user=== undefined ? undefined: req.user.name, isLoggedIn: req.isAuthenticated});
 });
+
 userRouter.get("/getReport", isAuthenticated, async(req, res)=>{
 
     let result = await weightAdd.findOne({userid: req.user.id},{userdetails: 1, _id: 0 });
