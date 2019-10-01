@@ -28,11 +28,12 @@ let schema = mongoose.Schema({
 });
 schema.pre("save", async function(next){
     try{
-        this.password =  await bcrypt.hash(this.password);
+        this.password =  await bcrypt.hash(this.password, 8);
         next();
     }
     catch(err){
-        next();
+        console.log(err);
+        res.redirect("/signup");
     }
 
 });

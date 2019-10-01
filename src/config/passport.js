@@ -1,6 +1,6 @@
 const localStrategy = require("passport-local").Strategy;
 const UserModel = require("../models/user");
-
+const bcrypt = require("bcryptjs");
 module.exports = function (passport){
     
     passport.use("Local", new localStrategy({
@@ -9,15 +9,19 @@ module.exports = function (passport){
 
     }, async function(username, password, done){
         
-        console.log(username);
-        let currentUser = await UserModel.findOne({email: username, password: password});
         
+        let currentUser = await UserModel.findOne({email: username});
+
          if(currentUser == null)
-             return  done(null, false);
+             return  done(null, false,{message: "Invalid Email"});
     
-        else
-            return done(null, currentUser);
-    
+        else{
+            let result = await bcrypt.compare(password, currentUser.password);
+            if(result)
+                return done(null, currentUser);
+            else 
+                return  done(null, false, {message: "Invalid Passoword"});
+        }
     }));
     passport.serializeUser(function(user, cb){
 

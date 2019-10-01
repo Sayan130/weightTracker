@@ -8,17 +8,18 @@
 
 	<body>
 		<%- include('partials/nav') %>
+		<p name="flash-msg" id="flash"></p>
 		<div class = "signup">
 			<form  class="sign-up" id="Sform">
 			<div class = "flash">
-				<p id="flash-msg"></p>
+				
 			</div>
 			  <table>
 				<tr><td><input type="text" placeholder="Name" required name="User" ></td></tr>
 				<tr><td><input type="text" placeholder="Email" required name="Email"></td></tr>
 				<tr><td><input type="password" placeholder="Password" required name="password" id="user_pass"></td></tr>
 				<tr><td><input type="password" placeholder="Confirm Password" required name="confirm" id="user_confirm" ></td></tr>
-				<tr><td><button class="submit" onclick="return validate();">Signup</button></td></tr>
+				<tr><td><button class="submit" onclick="return validate(event);">Signup</button></td></tr>
 
 			  </table>
 			</form>

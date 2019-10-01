@@ -7,8 +7,11 @@ async function  getResults(){
     if(response.ok){
 
        let result = await response.json();
-       plot(result.result);
-
+       if(result.userdetails != null)
+            plot(result.result);
+        else{
+            alert("You have given no input till now.")
+        }
     }
     else{
 
@@ -62,34 +65,52 @@ function tablePlot(result){
 
 
 }
-async function validate(){
-
-    let pass = document.querySelector("#user_pass").nodeValue;
-    let confirm = document.querySelector("#user_confirm").nodeValue;
-    let flash = document.querySelector("#flash-msg");
+async function validate(event){
+    try{
+    
+    event.preventDefault();
+    let pass = document.querySelector(`[name = "password"]`).value;
+    let confirm = document.querySelector(`[name = "confirm"]`).value
+    let flash = document.querySelector(`[name = "flash-msg"]`);
+    let User = document.querySelector(`[name = "User"]`).value;
+    let Email = document.querySelector(`[name = "Email"]`).value;
     
     if(pass != confirm){
-        flash.innerHTML = "Both password field is not matching"        
+        alert("Both password field is not matching");        
+        return false;
+    }
+    else if(pass.length < 8){
+        alert("Password must be more than 8 characters.");        
         return false;
     }
     else{
-        return false;
-        // let result = await fetch("/signup", {
-        //     method: "POST",
-        //     body: new FormData("Sform")
-        // });
+        
+        let user = {User: User, Email: Email, password: pass};
+        
+        let result = await fetch("/signup", {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers:{
+                'Content-Type': 'application/json'
+              }
+        });
 
-        // result = result.json();
-        // alert(JSON.stringify(result));
-        // if(result.sucess == true){
-        //     flash.innerHTML = "Signup successful";
-        //     return true;
-        // }
-        // else{
-        //     flash.innerHTML = "Error occured";
-        //     return false;
-        // }
-        // alert("Hello");
+        result = await result.json();
+        alert(JSON.stringify(result));
+        
+        if(result.sucess === true){
+            flash.innerHTML = "Signup successful";
+            return true;
+        }
+        else{
+            flash.innerHTML = result.error;
+            return false;
+        }
+        
+    }
+    }
+    catch(err){
+        alert(err);
     }
 
 }

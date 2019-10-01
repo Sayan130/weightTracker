@@ -46,4 +46,14 @@ button:hover{
 	border-radius: 10px;
 
 }
+#flash{
+
+	box-shadow: 0 5px 5px red;
+	border: 4px solid rgba(209, 193, 17 0.3);
+	margin-top: 50px; 
+	font-family: sans-serif;
+	font-color: yellow; 
+	width: 150px;
+	font-size: 9px;
+}
 
