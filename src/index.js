@@ -15,9 +15,9 @@ require("./config/passport");
 const path = require("path");
 const res = path.join(__dirname, "/templates");
 const static = path.join(__dirname, "/templates/static");
-
+const env =  require("dotenv").config({path:path.join(__dirname, "../config/.env")});
 app.use(require("express-session")({
-    secret : "Sayan",
+    secret : process.env.secret,
     resave : false,
     saveUninitialized : false,
     cookie : {maxAge : 600000}
